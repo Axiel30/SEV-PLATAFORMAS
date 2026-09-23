@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\Animation.obj",
+            "outputs": [
+                "Debug\\Animation.h.obj.dt.module.json",
+                "Debug\\Animation.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

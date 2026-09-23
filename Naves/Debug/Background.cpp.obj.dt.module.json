@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\Background.obj",
+            "outputs": [
+                "Debug\\Background.cpp.obj.dt.module.json",
+                "Debug\\Background.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

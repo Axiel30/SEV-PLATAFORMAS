@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\GameLayer.obj",
+            "outputs": [
+                "Debug\\GameLayer.cpp.obj.dt.module.json",
+                "Debug\\GameLayer.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

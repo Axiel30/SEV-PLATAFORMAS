@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\Actor.obj",
+            "outputs": [
+                "Debug\\Actor.h.obj.dt.module.json",
+                "Debug\\Actor.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
