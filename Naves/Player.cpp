@@ -1,11 +1,17 @@
 #include "Player.h"
 
 Player::Player(float x, float y, Game* game)
-	: Actor("res/jugador.png", x, y, 35, 35, game) {
+	: Actor("res/jugador.png", x, y, 36, 30, game) {
+	onAir = false;
+
 	orientation = game->orientationRight;
 	state = game->stateMoving;
-	audioShoot = Audio::createAudio("re/ efecto_disparo.wav", false);
+	audioShoot = Audio::createAudio("res/efecto_disparo.wav", false);
 
+	aJumpingRight = new Animation("res/jugador_saltando_derecha.png",
+		width, height, 160, 40, 6, 4, true, game);
+	aJumpingLeft = new Animation("res/jugador_saltando_izquierda.png",
+		width, height, 160, 40, 6, 4, true, game);
 	aShootingRight = new Animation("res/jugador_disparando_derecha.png",
 			width, height, 160, 40, 6, 4, false, game);
 	aShootingLeft = new Animation("res/jugador_disparando_izquierda.png",
@@ -27,7 +33,38 @@ Player::Player(float x, float y, Game* game)
 
 
 void Player::update() {
+	// En el aire y moviéndose, PASA a estar saltando
+	if (onAir && state == game->stateMoving) {
+		state = game->stateJumping;
+	}
+	// No está en el aire y estaba saltando, PASA a moverse
+	if (!onAir && state == game->stateJumping) {
+		state = game->stateMoving;
+	}
+
+	if (invulnerableTime > 0) {
+		invulnerableTime--;
+	}
+
 	bool endAnimation = animation->update();
+
+	if (collisionDown == true) {
+		onAir = false;
+	}
+	else {
+		onAir = true;
+	}
+
+	// Selección de animación basada en estados
+	if (state == game->stateJumping) {
+		if (orientation == game->orientationRight) {
+			animation = aJumpingRight;
+		}
+		if (orientation == game->orientationLeft) {
+			animation = aJumpingLeft;
+		}
+	}
+
 	// Acabo la animación, no sabemos cual
 	if (endAnimation) {
 		// Estaba disparando
@@ -76,9 +113,6 @@ void Player::update() {
 	if (shootTime > 0) {
 		shootTime--;
 	}
-
-	x = x + vx;
-	y = y + vy;
 }
 
 void Player::moveX(float axis) {
@@ -109,6 +143,31 @@ Projectile* Player::shoot() {
 
 }
 
-void Player::draw() {
-	animation->draw(x, y);
+void Player::draw(float scrollX) {
+	if (invulnerableTime == 0) {
+		animation->draw(x - scrollX, y);
+	}
+	else {
+		if (invulnerableTime % 10 >= 0 && invulnerableTime % 10 <= 5) {
+			animation->draw(x - scrollX, y);
+		}
+	}
+
+}
+
+void Player::jump() {
+	if (!onAir) {
+		vy = -16;
+		onAir = true;
+	}
+}
+
+void Player::loseLife() {
+	if (invulnerableTime <= 0) {
+		if (lifes > 0) {
+			lifes--;
+			invulnerableTime = 100;
+			// 100 actualizaciones
+		}
+	}
 }

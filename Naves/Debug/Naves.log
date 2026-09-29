@@ -1,25 +1,28 @@
 ﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(551,5): warning MSB8028: El directorio intermedio (Debug\) contiene archivos compartidos de otro proyecto (Plataformas.vcxproj). Esto puede dar lugar a un comportamiento incorrecto de limpieza y recompilación.
-  Enemy.cpp
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Enemy.cpp(7,57): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Enemy.cpp(7,50): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Enemy.cpp(10,63): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Enemy.cpp(10,56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Enemy.cpp(26,9): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Enemy.cpp(31,21): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Enemy.cpp(31,18): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-  Game.cpp
+  Player.cpp
 C:\Users\axiel\Desktop\SEV\SEV2\Naves\Audio.h(6,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-  (compilando archivo de origen "Game.cpp")
+  (compilando archivo de origen "Player.cpp")
   
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Game.cpp(64,56): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Game.cpp(64,35): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-  GameLayer.cpp
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\Audio.h(6,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-  (compilando archivo de origen "GameLayer.cpp")
-  
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\GameLayer.cpp(14,53): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\GameLayer.cpp(14,38): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\GameLayer.cpp(141,35): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\axiel\Desktop\SEV\SEV2\Naves\GameLayer.cpp(141,31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-  Generando código...
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(12,10): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(12,3): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(14,10): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(14,3): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(16,11): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(16,4): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(18,10): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(18,3): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(20,68): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(20,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(22,69): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(22,62): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(24,76): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(24,69): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(26,77): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(26,70): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(28,77): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(28,70): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(133,46): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(133,43): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(148,32): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\SEV\SEV2\Naves\Player.cpp(152,33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
   Naves.vcxproj -> C:\Users\axiel\Desktop\SEV\SEV2\Debug\Naves.exe

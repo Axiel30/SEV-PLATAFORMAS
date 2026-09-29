@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\Tile.obj",
+            "outputs": [
+                "Debug\\Tile.cpp.obj.dt.module.json",
+                "Debug\\Tile.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

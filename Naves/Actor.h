@@ -7,9 +7,10 @@ class Actor
 public:
 	Actor(string filename, float x, float y, int width, int height, Game* game);
 	~Actor();
-	virtual void draw();
-	bool isInRender();
+	virtual void draw(float scrollX = 0);
+	bool isInRender(float scrollX = 0);
 	bool isOverlap(Actor* actor);
+	bool collisionDown;
 	SDL_Texture* texture;
 	int x;
 	int y;

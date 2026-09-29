@@ -1,11 +1,10 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\gamelayer.cpp",
+        "Source": "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\tile.h",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\gamelayer.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\layer.h",
+            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\actor.h",
             "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\game.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\iostream",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\yvals_core.h",
@@ -268,23 +267,7 @@
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\map",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\tuple",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\xtree",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\player.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\actor.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\projectile.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\audio.h",
-            "c:\\videojuegos\\include\\sdl_mixer.h",
-            "c:\\videojuegos\\include\\begin_code.h",
-            "c:\\videojuegos\\include\\close_code.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\animation.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\background.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\enemy.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\text.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\tile.h",
-            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\space.h",
-            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\list",
-            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\fstream",
-            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\__msvc_filebuf.hpp",
-            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\sstream"
+            "c:\\users\\axiel\\desktop\\sev\\sev2\\naves\\layer.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

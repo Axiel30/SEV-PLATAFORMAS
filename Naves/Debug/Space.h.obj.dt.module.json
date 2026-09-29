@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\Space.obj",
+            "outputs": [
+                "Debug\\Space.h.obj.dt.module.json",
+                "Debug\\Space.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

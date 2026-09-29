@@ -7,6 +7,10 @@ GameLayer::GameLayer(Game* game)
 }
 
 void GameLayer::init() {
+	space = new Space(1);
+	scrollX = 0;
+	tiles.clear();
+
 	audioBackground = Audio::createAudio("res/musica_ambiente.mp3", true);
 	audioBackground->play();
 
@@ -14,7 +18,6 @@ void GameLayer::init() {
 	textPoints = new Text("hola", WIDTH * 0.92, HEIGHT * 0.04, game);
 	textPoints->content = to_string(points);
 
-	player = new Player(50, 50, game);
 	background = new Background("res/fondo_2.png", WIDTH * 0.5, HEIGHT * 0.5, 1, game);
 	backgroundPoints = new Actor("res/icono_puntos.png",
 		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, game);
@@ -22,8 +25,8 @@ void GameLayer::init() {
 	projectiles.clear(); // Vaciar por si reiniciamos el juego
 
 	enemies.clear(); // Vaciar por si reiniciamos el juego
-	enemies.push_back(new Enemy(300, 50, game));
-	enemies.push_back(new Enemy(300, 200, game));
+	
+	loadMap("res/0.txt");
 }
 
 void GameLayer::processControls() {
@@ -37,6 +40,7 @@ void GameLayer::processControls() {
 	if (controlShoot) {
 		Projectile* newProjectile = player->shoot();
 		if (newProjectile != NULL) {
+			space->addDynamicActor(newProjectile);
 			projectiles.push_back(newProjectile);
 		}
 
@@ -55,13 +59,13 @@ void GameLayer::processControls() {
 
 	// Eje Y
 	if (controlMoveY > 0) {
-		player->moveY(1);
+		
 	}
 	else if (controlMoveY < 0) {
-		player->moveY(-1);
+		player->jump();
 	}
 	else {
-		player->moveY(0);
+	
 	}
 
 }
@@ -132,17 +136,14 @@ void GameLayer::keysToControls(SDL_Event event) {
 }
 
 void GameLayer::update() {
-	background->update();
-	// Generar enemigos
-	newEnemyTime--;
-	if (newEnemyTime <= 0) {
-		int rX = (rand() % (600 - 500)) + 1 + 500;
-		int rY = (rand() % (300 - 60)) + 1 + 60;
-		enemies.push_back(new Enemy(rX, rY, game));
-		newEnemyTime = 110;
+	// Jugador se cae
+	if (player->y > HEIGHT + 80) {
+		init();
 	}
 
-
+	space->update();
+	background->update();
+ 
 	player->update();
 	for (auto const& enemy : enemies) {
 		enemy->update();
@@ -151,8 +152,11 @@ void GameLayer::update() {
 	// Colisiones
 	for (auto const& enemy : enemies) {
 		if (player->isOverlap(enemy)) {
-			init();
-			return; // Cortar el for
+			player->loseLife();
+			if (player->lifes <= 0) {
+				init();
+				return;
+			}
 		}
 	}
 
@@ -162,7 +166,7 @@ void GameLayer::update() {
 	list<Projectile*> deleteProjectiles;
 
 	for (auto const& projectile : projectiles) {
-		if (projectile->isInRender() == false) {
+		if (projectile->isInRender(scrollX) == false || projectile->vx == 0) {
 			bool pInList = std::find(deleteProjectiles.begin(),
 				deleteProjectiles.end(),
 				projectile) != deleteProjectiles.end();
@@ -198,11 +202,13 @@ void GameLayer::update() {
 
 	for (auto const& delEnemy : deleteEnemies) {
 		enemies.remove(delEnemy);
+		space->removeDynamicActor(delEnemy);
 	}
 	deleteEnemies.clear();
 
 	for (auto const& delProjectile : deleteProjectiles) {
 		projectiles.remove(delProjectile);
+		space->removeDynamicActor(delProjectile);
 		delete delProjectile;
 	}
 	deleteProjectiles.clear();
@@ -215,18 +221,107 @@ void GameLayer::update() {
 	cout << "update GameLayer" << endl;
 }
 
-void GameLayer::draw() {
-	background->draw();
-	for (auto const& projectile : projectiles) {
-		projectile->draw();
+void GameLayer::calculateScroll() {
+	// limite izquierda
+	if (player->x > WIDTH * 0.3) {
+		if (player->x - scrollX < WIDTH * 0.3) {
+			scrollX = player->x - WIDTH * 0.3;
+		}
 	}
-	player->draw();
+	// limite derecha
+	if (player->x < mapWidth - WIDTH * 0.3) {
+		if (player->x - scrollX > WIDTH * 0.7) {
+			scrollX = player->x - WIDTH * 0.7;
+		}
+	}
+}
+
+void GameLayer::draw() {
+	calculateScroll();
+
+	background->draw();
+	for (auto const& tile : tiles) {
+		tile->draw(scrollX);
+	}
+
+	for (auto const& projectile : projectiles) {
+		projectile->draw(scrollX);
+	}
+	player->draw(scrollX);
 
 	for (auto const& enemy : enemies) {
-		enemy->draw();
+		enemy->draw(scrollX);
 	}
 	textPoints->draw();
 	backgroundPoints->draw();
 
 	SDL_RenderPresent(game->renderer); // Renderiza
+}
+
+void GameLayer::loadMap(string name) {
+	char character;
+	string line;
+	ifstream streamFile(name.c_str());
+	if (!streamFile.is_open()) {
+		cout << "Falla abrir el fichero de mapa" << endl;
+		return;
+	}
+	else {
+		// Por línea
+		for (int i = 0; getline(streamFile, line); i++) {
+			istringstream streamLine(line);
+			mapWidth = line.length() * 40; // Ancho del mapa en pixels
+			// Por carácter (en cada línea)
+			for (int j = 0; !streamLine.eof(); j++) {
+				streamLine >> character; // Leer character
+				cout << character;
+				float x = 40 / 2 + j * 40; // x central
+				float y = 32 + i * 32; // y suelo
+				loadMapObject(character, x, y);
+			}
+			cout << character << endl;
+		}
+	}
+	streamFile.close();
+}
+
+void GameLayer::loadMapObject(char character, float x, float y)
+{
+	switch (character) {
+	case '.': {
+		Tile* tile = new Tile("res/bloque_fondo_muro.png", x, y, game);
+		// modificación para empezar a contar desde el suelo.
+		tile->y = tile->y - tile->height / 2;
+		tiles.push_back(tile);
+		// NO SE AÑADE AL SPACE FISICO
+		break;
+	}
+	case 'E': {
+		// Primero añadir Tile - Fondo en la misma posición
+		loadMapObject('.', x, y);
+		Enemy* enemy = new Enemy(x, y, game);
+		// modificación para empezar a contar desde el suelo.
+		enemy->y = enemy->y - enemy->height / 2;
+		enemies.push_back(enemy);
+		space->addDynamicActor(enemy);
+		break;
+	}
+	case '1': {
+		// Primero añadir Tile - Fondo en la misma posición
+		loadMapObject('.', x, y);
+		player = new Player(x, y, game);
+		// modificación para empezar a contar desde el suelo.
+		player->y = player->y - player->height / 2;
+		space->addDynamicActor(player);
+		break;
+	}
+	case '#': {
+		Tile* tile = new Tile("res/bloque_tierra.png", x, y, game);
+		// modificación para empezar a contar desde el suelo.
+		tile->y = tile->y - tile->height / 2;
+		tiles.push_back(tile);
+		space->addStaticActor(tile);
+		break;
+	}
+	}
 }
