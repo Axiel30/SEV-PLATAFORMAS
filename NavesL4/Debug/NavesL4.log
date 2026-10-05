@@ -1,0 +1,86 @@
+﻿  Actor.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Actor.cpp(10,12): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Actor.cpp(11,12): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Actor.cpp(30,32): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Animation.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(11,21): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(12,22): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(13,20): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(14,21): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(29,13): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(30,13): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(54,26): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(62,20): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Animation.cpp(63,20): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Audio.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Audio.h(6,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+  (compilando archivo de origen "Audio.cpp")
+  
+  Background.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Background.cpp(19,9): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Enemy.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Enemy.cpp(8,57): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Enemy.cpp(8,50): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Enemy.cpp(11,63): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Enemy.cpp(11,56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Enemy.cpp(65,31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Game.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Audio.h(6,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+  (compilando archivo de origen "Game.cpp")
+  
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Game.cpp(65,56): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Game.cpp(65,35): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  GameLayer.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Audio.h(6,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+  (compilando archivo de origen "GameLayer.cpp")
+  
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\GameLayer.cpp(19,53): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\GameLayer.cpp(19,38): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\GameLayer.cpp(50,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\GameLayer.cpp(51,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\GameLayer.cpp(236,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\GameLayer.cpp(243,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  Layer.cpp
+  Main.cpp
+  Player.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Audio.h(6,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+  (compilando archivo de origen "Player.cpp")
+  
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(11,10): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(11,3): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(13,10): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(13,3): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(16,10): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(16,3): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(18,10): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(18,3): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(19,68): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(19,61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(21,69): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(21,62): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(23,76): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(23,69): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(25,77): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(25,70): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(27,77): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(27,70): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(137,46): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(137,43): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(150,32): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Player.cpp(154,33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Projectile.cpp
+  Space.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Space.cpp(32,30): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Space.cpp(62,26): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Space.cpp(69,30): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Space.cpp(101,26): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Space.cpp(108,30): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Space.cpp(140,26): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Space.cpp(148,30): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Space.cpp(181,26): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+  Text.cpp
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Text.cpp(5,12): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\NavesL4\Text.cpp(6,12): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Tile.cpp
+  Generando código...
+  NavesL4.vcxproj -> C:\Users\axiel\Desktop\Uni\sev\NavesL4\NavesL4\Debug\NavesL4.exe
