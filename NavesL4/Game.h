@@ -30,7 +30,17 @@ public:
 	SDL_Window* window; // ventana
 	SDL_Renderer* renderer; // renderizador
 	bool loopActive; // Juego activo
+	Layer* layer;
+	Layer* menuLayer;
 	Layer* gameLayer;
+
+	int currentLevel = 0;
+	int finalLevel = 2;
+
+	int input;
+	int const inputKeyboard = 1;
+	int const inputMouse = 2;
+	int const inputGamePad = 3;
 
 	int const stateMoving = 1;
 	int const stateJumping = 2;

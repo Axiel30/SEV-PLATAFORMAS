@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\MovingPlataform.obj",
+            "outputs": [
+                "Debug\\MovingPlataform.h.obj.dt.module.json",
+                "Debug\\MovingPlataform.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

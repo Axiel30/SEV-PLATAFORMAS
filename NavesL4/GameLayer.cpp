@@ -1,25 +1,36 @@
-#include "GameLayer.h"
+ï»¿#include "GameLayer.h"
 
 GameLayer::GameLayer(Game* game)
 	: Layer(game) {
 	//llama al constructor del padre : Layer(renderer)
+	pause = true;
+	message = new Actor("res/mensaje_como_jugar.png", WIDTH * 0.5, HEIGHT * 0.5,
+		WIDTH, HEIGHT, game);
+
+	gamePad = SDL_GameControllerOpen(0);
 	init();
 }
 
 
 void GameLayer::init() {
+	pad = new Pad(WIDTH * 0.15, HEIGHT * 0.80, game);
+
+	buttonJump = new Actor("res/boton_salto.png", WIDTH * 0.9, HEIGHT * 0.55, 100, 100, game);
+	buttonShoot = new Actor("res/boton_disparo.png", WIDTH * 0.75, HEIGHT * 0.83, 100, 100, game);
+
 	space = new Space(1);
 	scrollX = 0;
 	tiles.clear();
+	movingPlatforms.clear();
 
-	audioBackground = new Audio("res/musica_ambiente.mp3", true);
+	audioBackground = Audio::createAudio("res/musica_ambiente.mp3", true);
 	audioBackground->play();
 
 	points = 0;
 	textPoints = new Text("hola", WIDTH * 0.92, HEIGHT * 0.04, game);
 	textPoints->content = to_string(points);
 
-	
+
 	background = new Background("res/fondo_2.png", WIDTH * 0.5, HEIGHT * 0.5, -1, game);
 	backgroundPoints = new Actor("res/icono_puntos.png",
 		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, game);
@@ -27,7 +38,7 @@ void GameLayer::init() {
 	enemies.clear(); // Vaciar por si reiniciamos el juego
 	projectiles.clear(); // Vaciar por si reiniciamos el juego
 
-	loadMap("res/0.txt");
+	loadMap("res/" + to_string(game->currentLevel) + ".txt");
 }
 
 void GameLayer::loadMap(string name) {
@@ -39,11 +50,11 @@ void GameLayer::loadMap(string name) {
 		return;
 	}
 	else {
-		// Por línea
+		// Por lï¿½nea
 		for (int i = 0; getline(streamFile, line); i++) {
 			istringstream streamLine(line);
 			mapWidth = line.length() * 40; // Ancho del mapa en pixels
-			// Por carácter (en cada línea)
+			// Por carï¿½cter (en cada lÃ­nea)
 			for (int j = 0; !streamLine.eof(); j++) {
 				streamLine >> character; // Leer character 
 				cout << character;
@@ -61,9 +72,16 @@ void GameLayer::loadMap(string name) {
 void GameLayer::loadMapObject(char character, float x, float y)
 {
 	switch (character) {
+	case 'C': {
+		cup = new Tile("res/copa.png", x, y, game);
+		// modificaciÃ³n para empezar a contar desde el suelo.
+		cup->y = cup->y - cup->height / 2;
+		space->addDynamicActor(cup); // Realmente no hace falta
+		break;
+	}
 	case 'E': {
 		Enemy* enemy = new Enemy(x, y, game);
-		// modificación para empezar a contar desde el suelo.
+		// modificaciÃ³n para empezar a contar desde el suelo.
 		enemy->y = enemy->y - enemy->height / 2;
 		enemies.push_back(enemy);
 		space->addDynamicActor(enemy);
@@ -71,17 +89,25 @@ void GameLayer::loadMapObject(char character, float x, float y)
 	}
 	case '1': {
 		player = new Player(x, y, game);
-		// modificación para empezar a contar desde el suelo.
+		// modificaciÃ³n para empezar a contar desde el suelo.
 		player->y = player->y - player->height / 2;
 		space->addDynamicActor(player);
 		break;
 	}
 	case '#': {
 		Tile* tile = new Tile("res/bloque_tierra.png", x, y, game);
-		// modificación para empezar a contar desde el suelo.
+		// modificaciÃ³n para empezar a contar desde el suelo.
 		tile->y = tile->y - tile->height / 2;
 		tiles.push_back(tile);
 		space->addStaticActor(tile);
+		break;
+	}
+	case 'X': {
+		MovingPlatform* platform = new MovingPlatform(x, y, game);
+		// modificaciÃ³n para empezar a contar desde el suelo.
+		platform->y = platform->y - platform->height / 2;
+		movingPlatforms.push_back(platform);
+		space->addStaticActor(platform);
 		break;
 	}
 	}
@@ -92,11 +118,48 @@ void GameLayer::processControls() {
 	// obtener controles
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
-		keysToControls(event);
+		if (event.type == SDL_CONTROLLERDEVICEADDED) {
+			gamePad = SDL_GameControllerOpen(0);
+			if (gamePad == NULL) {
+				cout << "error en GamePad" << endl;
+			}
+			else {
+				cout << "GamePad conectado" << endl;
+			}
+		}
+
+		// Cambio automatico de input
+		// PONER el GamePad
+		if (event.type == SDL_CONTROLLERBUTTONDOWN || event.type == SDL_CONTROLLERAXISMOTION) {
+			game->input = game->inputGamePad;
+		}
+		if (event.type == SDL_KEYDOWN) {
+			game->input = game->inputKeyboard;
+		}
+		if (event.type == SDL_MOUSEBUTTONDOWN) {
+			game->input = game->inputMouse;
+		}
+		// Procesar teclas
+		if (game->input == game->inputKeyboard) {
+			keysToControls(event);
+		}
+		if (game->input == game->inputMouse) {
+			mouseToControls(event);
+		}
+		// Procesar Mando
+		if (game->input == game->inputGamePad) {  // gamePAD
+			gamePadToControls(event);
+		}
+
+
 	}
 	//procesar controles
 	//procesar controles
 	// Disparar
+	if (controlContinue) {
+		pause = false;
+		controlContinue = false;
+	}
 	if (controlShoot) {
 		Projectile* newProjectile = player->shoot();
 		if (newProjectile != NULL) {
@@ -119,7 +182,7 @@ void GameLayer::processControls() {
 
 	// Eje Y
 	if (controlMoveY > 0) {
-	
+
 	}
 	else if (controlMoveY < 0) {
 		player->jump();
@@ -127,15 +190,32 @@ void GameLayer::processControls() {
 	else {
 
 	}
-
-
-
 }
 
 void GameLayer::update() {
+	if (pause) {
+		return;
+	}
+
+	// Nivel superado
+	if (cup->isOverlap(player)) {
+		game->currentLevel++;
+		if (game->currentLevel > game->finalLevel) {
+			game->currentLevel = 0;
+		}
+		message = new Actor("res/mensaje_ganar.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH, HEIGHT, game);
+		pause = true;
+		init();
+	}
+
 	// Jugador se cae
 	if (player->y > HEIGHT + 80) {
 		init();
+	}
+
+	for (auto const& platform : movingPlatforms) {
+		platform->update();
 	}
 
 	space->update();
@@ -253,11 +333,14 @@ void GameLayer::draw() {
 	for (auto const& tile : tiles) {
 		tile->draw(scrollX);
 	}
+	for (auto const& platform : movingPlatforms) {
+		platform->draw(scrollX);
+	}
 
 	for (auto const& projectile : projectiles) {
 		projectile->draw(scrollX);
 	}
-
+	cup->draw(scrollX);
 	player->draw(scrollX);
 	for (auto const& enemy : enemies) {
 		enemy->draw(scrollX);
@@ -265,8 +348,119 @@ void GameLayer::draw() {
 
 	backgroundPoints->draw();
 	textPoints->draw();
+
+	// HUD
+	if (game->input == game->inputMouse) {
+		buttonJump->draw(); // NO TIENEN SCROLL, POSICION FIJA
+		buttonShoot->draw(); // NO TIENEN SCROLL, POSICION FIJA
+		pad->draw(); // NO TIENEN SCROLL, POSICION FIJA
+	}
+	if (pause) {
+		message->draw();
+	}
+
 	SDL_RenderPresent(game->renderer); // Renderiza
 }
+
+void GameLayer::gamePadToControls(SDL_Event event) {
+
+	// Leer los botones
+	bool buttonA = SDL_GameControllerGetButton(gamePad, SDL_CONTROLLER_BUTTON_A);
+	bool buttonB = SDL_GameControllerGetButton(gamePad, SDL_CONTROLLER_BUTTON_B);
+	// SDL_CONTROLLER_BUTTON_A, SDL_CONTROLLER_BUTTON_B
+	// SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_Y
+	cout << "botones:" << buttonA << "," << buttonB << endl;
+	int stickX = SDL_GameControllerGetAxis(gamePad, SDL_CONTROLLER_AXIS_LEFTX);
+	cout << "stickX" << stickX << endl;
+
+	// Retorna aproximadamente entre [-32800, 32800], el centro deberï¿½a estar en 0
+	// Si el mando tiene "holgura" el centro varia [-4000 , 4000]
+	if (stickX > 4000) {
+		controlMoveX = 1;
+	}
+	else if (stickX < -4000) {
+		controlMoveX = -1;
+	}
+	else {
+		controlMoveX = 0;
+	}
+
+	if (buttonA) {
+		controlShoot = true;
+	}
+	else {
+		controlShoot = false;
+	}
+
+	if (buttonB) {
+		controlMoveY = -1; // Saltar
+	}
+	else {
+		controlMoveY = 0;
+	}
+}
+
+
+void GameLayer::mouseToControls(SDL_Event event) {
+	// ModificaciÃ³n de coordenadas por posible escalado
+	float motionX = event.motion.x / game->scaleLower;
+	float motionY = event.motion.y / game->scaleLower;
+	// Cada vez que hacen click
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		controlContinue = true;
+		if (pad->containsPoint(motionX, motionY)) {
+			pad->clicked = true;
+			// CLICK TAMBIEN TE MUEVE
+			controlMoveX = pad->getOrientationX(motionX);
+		}
+		if (buttonShoot->containsPoint(motionX, motionY)) {
+			controlShoot = true;
+		}
+		if (buttonJump->containsPoint(motionX, motionY)) {
+			controlMoveY = -1;
+		}
+
+	}
+	// Cada vez que se mueve
+	if (event.type == SDL_MOUSEMOTION) {
+		if (pad->clicked && pad->containsPoint(motionX, motionY)) {
+			controlMoveX = pad->getOrientationX(motionX);
+			// Rango de -20 a 20 es igual que 0
+			if (controlMoveX > -20 && controlMoveX < 20) {
+				controlMoveX = 0;
+			}
+
+		}
+		else {
+			pad->clicked = false; // han sacado el ratï¿½n del pad
+			controlMoveX = 0;
+		}
+		if (buttonShoot->containsPoint(motionX, motionY) == false) {
+			controlShoot = false;
+		}
+		if (buttonJump->containsPoint(motionX, motionY) == false) {
+			controlMoveY = 0;
+		}
+
+	}
+	// Cada vez que levantan el click
+	if (event.type == SDL_MOUSEBUTTONUP) {
+		if (pad->containsPoint(motionX, motionY)) {
+			pad->clicked = false;
+			// LEVANTAR EL CLICK TAMBIEN TE PARA
+			controlMoveX = 0;
+		}
+
+		if (buttonShoot->containsPoint(motionX, motionY)) {
+			controlShoot = false;
+		}
+		if (buttonJump->containsPoint(motionX, motionY)) {
+			controlMoveY = 0;
+		}
+
+	}
+}
+
 
 void GameLayer::keysToControls(SDL_Event event) {
 	if (event.type == SDL_KEYDOWN) {
