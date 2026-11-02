@@ -12,6 +12,7 @@ public:
 	Projectile* shoot();
 	void update();
 	void jump();
+	void bounce(float force = 10.0f);
 	void moveX(float axis);
 	void moveY(float axis);
 	void draw(float scrollX = 0) override; // Va a sobrescribir
@@ -29,9 +30,8 @@ public:
 	Animation* aRunningLeft;
 	Animation* aShootingRight;
 	Animation* aShootingLeft;
-	Animation* animation; // Referencia a la animación mostrada
+	Animation* animation; // Referencia a la animacion mostrada
 	Audio* audioShoot;
 	int shootCadence = 30;
 	int shootTime = 0;
 };
-

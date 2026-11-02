@@ -172,3 +172,9 @@ void Player::loseLife() {
 		}
 	}
 }
+
+void Player::bounce(float force) {
+	vy = -force;
+	onAir = true;
+	state = game->stateJumping;
+}

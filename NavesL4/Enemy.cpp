@@ -1,9 +1,32 @@
 #include "Enemy.h"
 
-Enemy::Enemy(float x, float y, Game* game)
-	: Actor("res/enemigo.png", x, y, 36, 40, game) {
+Enemy::~Enemy() {
+	if (aDying != nullptr) {
+		delete aDying;
+		aDying = nullptr;
+	}
+	if (aMoving != nullptr) {
+		delete aMoving;
+		aMoving = nullptr;
+	}
+}
 
+Enemy::Enemy(string filename, float x, float y, Game* game)
+	: Actor(filename, x, y, 36, 40, game) {
+
+	stompable = false;
 	state = game->stateMoving;
+	aDying = nullptr;
+	aMoving = nullptr;
+	animation = nullptr;
+
+	vx = 1;
+	vxIntelligence = -1;
+	vx = vxIntelligence;
+}
+
+Enemy::Enemy(float x, float y, Game* game)
+	: Enemy("res/enemigo.png", x, y, game) {
 
 	aDying = new Animation("res/enemigo_morir.png", width, height,
 		280, 40, 6, 8, false, game);
@@ -11,25 +34,19 @@ Enemy::Enemy(float x, float y, Game* game)
 	aMoving = new Animation("res/enemigo_movimiento.png", width, height,
 		108, 40, 6, 3, true, game);
 	animation = aMoving;
-
-	vx = 1;
-	vxIntelligence = -1;
-	vx = vxIntelligence;
-
 }
 
 void Enemy::update() {
-	// Actualizar la animación
+	// Actualizar la animacion
 	bool endAnimation = animation->update();
 
-	// Acabo la animación, no sabemos cual
+	// Acabo la animacion, no sabemos cual
 	if (endAnimation) {
 		// Estaba muriendo
 		if (state == game->stateDying) {
 			state = game->stateDead;
 		}
 	}
-
 
 	if (state == game->stateMoving) {
 		animation = aMoving;
@@ -40,7 +57,7 @@ void Enemy::update() {
 
 	// Establecer velocidad
 	if (state != game->stateDying) {
-		// no está muerto y se ha quedado parado
+		// no esta muerto y se ha quedado parado
 		if (vx == 0) {
 			vxIntelligence = vxIntelligence * -1;
 			vx = vxIntelligence;
@@ -59,14 +76,10 @@ void Enemy::update() {
 			}
 			vx = vxIntelligence;
 		}
-
 	}
 	else {
 		vx = 0;
 	}
-
-
-
 }
 
 void Enemy::impacted() {
@@ -75,9 +88,8 @@ void Enemy::impacted() {
 	}
 }
 
-
 void Enemy::draw(float scrollX) {
-	animation->draw(x - scrollX, y);
+	if (animation != nullptr) {
+		animation->draw(x - scrollX, y);
+	}
 }
-
-

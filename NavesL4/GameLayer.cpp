@@ -50,11 +50,11 @@ void GameLayer::loadMap(string name) {
 		return;
 	}
 	else {
-		// Por l�nea
+		// Por línea
 		for (int i = 0; getline(streamFile, line); i++) {
 			istringstream streamLine(line);
 			mapWidth = line.length() * 40; // Ancho del mapa en pixels
-			// Por car�cter (en cada línea)
+			// Por carácter (en cada línea)
 			for (int j = 0; !streamLine.eof(); j++) {
 				streamLine >> character; // Leer character 
 				cout << character;
@@ -82,6 +82,16 @@ void GameLayer::loadMapObject(char character, float x, float y)
 	case 'E': {
 		Enemy* enemy = new Enemy(x, y, game);
 		// modificación para empezar a contar desde el suelo.
+		enemy->y = enemy->y - enemy->height / 2;
+		enemies.push_back(enemy);
+		space->addDynamicActor(enemy);
+		break;
+	}
+	case 'S':
+	case 's':
+	case 'P':
+	case 'p': {
+		EnemyStompable* enemy = new EnemyStompable(x, y, game);
 		enemy->y = enemy->y - enemy->height / 2;
 		enemies.push_back(enemy);
 		space->addDynamicActor(enemy);
@@ -128,7 +138,7 @@ void GameLayer::processControls() {
 			}
 		}
 
-		// Cambio automatico de input
+		// Cambio automático de input
 		// PONER el GamePad
 		if (event.type == SDL_CONTROLLERBUTTONDOWN || event.type == SDL_CONTROLLERAXISMOTION) {
 			game->input = game->inputGamePad;
@@ -190,6 +200,9 @@ void GameLayer::processControls() {
 	else {
 
 	}
+
+
+
 }
 
 void GameLayer::update() {
@@ -229,13 +242,35 @@ void GameLayer::update() {
 	}
 
 
-	// Colisiones
+	// Colisiones Jugador - Enemigos
 	for (auto const& enemy : enemies) {
+		if (enemy->state == game->stateDying || enemy->state == game->stateDead) {
+			continue;
+		}
+
 		if (player->isOverlap(enemy)) {
-			player->loseLife();
-			if (player->lifes <= 0) {
-				init();
-				return;
+			// En el momento de la colision se comprueba si el jugador esta encima del enemigo
+			bool isPlayerAbove = (player->y < enemy->y) &&
+				((player->y + player->height / 2) <= (enemy->y + enemy->height / 4)) &&
+				(player->onAir || player->vy >= 0);
+
+			if (enemy->isStompable() && isPlayerAbove) {
+				// Enemigo muere al saltar sobre el
+				enemy->impacted();
+				points++;
+				textPoints->content = to_string(points);
+				Audio::createAudio("res/efecto_explosion.wav", false)->play();
+
+				// Rebote del jugador al saltar sobre el enemigo
+				player->bounce();
+			}
+			else {
+				// Colision normal: el jugador pierde una vida
+				player->loseLife();
+				if (player->lifes <= 0) {
+					init();
+					return;
+				}
 			}
 		}
 	}
@@ -373,7 +408,7 @@ void GameLayer::gamePadToControls(SDL_Event event) {
 	int stickX = SDL_GameControllerGetAxis(gamePad, SDL_CONTROLLER_AXIS_LEFTX);
 	cout << "stickX" << stickX << endl;
 
-	// Retorna aproximadamente entre [-32800, 32800], el centro deber�a estar en 0
+	// Retorna aproximadamente entre [-32800, 32800], el centro debería estar en 0
 	// Si el mando tiene "holgura" el centro varia [-4000 , 4000]
 	if (stickX > 4000) {
 		controlMoveX = 1;
@@ -432,7 +467,7 @@ void GameLayer::mouseToControls(SDL_Event event) {
 
 		}
 		else {
-			pad->clicked = false; // han sacado el rat�n del pad
+			pad->clicked = false; // han sacado el ratón del pad
 			controlMoveX = 0;
 		}
 		if (buttonShoot->containsPoint(motionX, motionY) == false) {

@@ -12,5 +12,3 @@ public:
 	float speed;
 	bool stopped;
 };
-
-typedef MovingPlatform Platform;
